@@ -3,49 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WORLD SPACE CENTRE APP 🚀</title>
+  <title>WORLD SPACE CENTRE APP - ISRO NASA</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="stars"></div>
+
   <header>
     <h1>🌍 WORLD SPACE CENTRE APP 🚀</h1>
-    <p>"Har Bachhe se Scientist tak - Space ka Gyaan Sabke Liye"</p>
+    <p>ISRO • NASA • ESA • SpaceX | Learn. Explore. Innovate.</p>
   </header>
 
   <nav>
-    <button onclick="showTab('solar')">🪐 Solar System</button>
-    <button onclick="showTab('missions')">🚀 Missions</button>
+    <button onclick="showTab('solar')">🪐 3D Solar System</button>
+    <button onclick="showTab('launch')">🚀 Rocket Launch</button>
+    <button onclick="showTab('missions')">📡 Live Missions</button>
     <button onclick="showTab('scientist')">👨‍🚀 Scientists</button>
-    <button onclick="showTab('quiz')">📝 Space Quiz</button>
+    <button onclick="showTab('crash')">💥 Satellite Crash</button>
+    <button onclick="showTab('quiz')">📝 Pro Quiz</button>
   </nav>
 
   <main>
     <section id="solar" class="tab">
-      <h2>Solar System</h2>
-      <div id="planets"></div>
+      <h2>Interactive Solar System</h2>
+      <div id="planets" class="grid"></div>
+    </section>
+
+    <section id="launch" class="tab" style="display:none;">
+      <h2>Rocket Launch Simulator</h2>
+      <div class="rocket-scene">
+        <div id="rocket">🚀</div>
+        <div id="flame"></div>
+      </div>
+      <button onclick="launchRocket()">Launch to ISS</button>
+      <p id="launchStatus">Ready for Launch</p>
     </section>
 
     <section id="missions" class="tab" style="display:none;">
-      <h2>ISRO & NASA Missions</h2>
+      <h2>ISRO & NASA Mission Timeline 1957-2026</h2>
       <ul id="missionList"></ul>
     </section>
 
     <section id="scientist" class="tab" style="display:none;">
-      <h2>Famous Scientists</h2>
-      <div id="scientistList"></div>
+      <h2>Legendary Scientists</h2>
+      <div id="scientistList" class="grid"></div>
+    </section>
+
+    <section id="crash" class="tab" style="display:none;">
+      <h2>Why Satellites Burn in Atmosphere?</h2>
+      <div class="crash-scene">
+        <div id="satellite">🛰️</div>
+      </div>
+      <button onclick="crashSatellite()">Re-enter Atmosphere</button>
+      <p id="crashInfo">Click to see Friction + Heat at 28,000 km/hr</p>
     </section>
 
     <section id="quiz" class="tab" style="display:none;">
-      <h2>Space Quiz</h2>
+      <h2>ISRO Scientist Exam Quiz</h2>
       <p id="question"></p>
-      <button onclick="checkAns('Mars')">Mars</button>
-      <button onclick="checkAns('Jupiter')">Jupiter</button>
-      <p id="result"></p>
+      <div id="options"></div>
+      <p id="score">Score: 0</p>
     </section>
   </main>
 
   <footer>
-    <p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p>
+    <p>Made in India 🇮🇳 with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p>
+    <p>For Educational Purpose. Not affiliated with ISRO/NASA</p>
   </footer>
 
   <script src="script.js"></script>
