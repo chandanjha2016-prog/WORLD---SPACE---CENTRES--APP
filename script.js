@@ -1,11 +1,37 @@
-function showTab(tabId){document.querySelectorAll('.tab').forEach(tab=>tab.style.display='none');document.getElementById(tabId).style.display='block';}
-const planets=[{name:"☀️ Sun",info:"Center of Solar System. Temp: 5500°C. 99% mass"},{name:"🌍 Earth",info:"Only planet with Life. 1 Moon. 71% Water"},{name:"🔴 Mars",info:"Red Planet. ISRO Mangalyaan 2013. 2 Moons"},{name:"🪐 Jupiter",info:"Biggest Planet. 79 Moons. Great Red Spot"},{name:"💫 Asteroid Belt",info:"Between Mars & Jupiter. Millions of rocks"},{name:"🌌 Milky Way",info:"Our Galaxy. 100 Billion Stars. 100,000 Light Years"}];
-const missions=["1969 - Apollo 11 - NASA - First Moon Landing","1984 - Soyuz T-11 - ISRO - Rakesh Sharma - First Indian in Space","2013 - Mangalyaan - ISRO - Mars Orbit in 1st Attempt","2023 - Chandrayaan 3 - ISRO - First Moon South Pole Landing","2025 - Gaganyaan - ISRO - First Indian Human Spaceflight Planned","2026 - Artemis II - NASA - First Crewed Moon Orbit in 50 Years"];
-const scientists=[{name:"Dr. APJ Abdul Kalam",work:"Missile Man of India. 11th President. Father of Agni Missile"},{name:"Dr. Vikram Sarabhai",work:"Father of Indian Space Program. Founded ISRO in 1969"},{name:"Rakesh Sharma",work:"First Indian in Space. 1984. Said 'Sare Jahan Se Achha' from Space"},{name:"Kalpana Chawla",work:"NASA Astronaut. Columbia STS-87, STS-107. Inspiration for millions"},{name:"Dr. K Sivan",work:"Ex ISRO Chairman. Led Chandrayaan-2, Chandrayaan-3 Missions"}];
-function loadPlanets(){document.getElementById('planets').innerHTML=planets.map(p=>`<div class="card" onclick="alert('${p.name}: ${p.info}')"><h3>${p.name}</h3><p>${p.info}</p></div>`).join('');}
+function showTab(tabId){document.querySelectorAll('.tab').forEach(tab=>tab.style.display='none');document.getElementById(tabId).style.display='block'; if(tabId==='live') initMap();}
+
+// 1. HINDI VOICE DATA
+const planets=[{name:"☀️ Suraj",info:"Ye Suraj hai. Saare Solar System ka kendra. Tapman 5500°C"},{name:"🌍 Prithvi",info:"Ye Prithvi hai. Yahi jeevan sambhav hai. 1 Chand hai"},{name:"🔴 Mangal",info:"Ye Mangal hai. Lal Grah. ISRO yaha pahunch chuka hai"},{name:"🪐 Brihaspati",info:"Ye Brihaspati hai. Sabse bada Grah. 79 Chand hain"},{name:"💫 Kshudragrah Patti",info:"Ye Kshudragrah Patti hai. Mangal aur Brihaspati ke beech"},{name:"🌌 Akash Ganga",info:"Ye Akash Ganga Aakashganga hai. 100 Arab Sitare"}];
+
+function speak(text){const msg=new SpeechSynthesisUtterance(text); msg.lang='hi-IN'; speechSynthesis.speak(msg);}
+
+function loadPlanets(){document.getElementById('planets').innerHTML=planets.map(p=>`<div class="card" onclick="speak('${p.info}')"><h3>${p.name}</h3><p>Click karke suno</p></div>`).join('');}
+
+// 2. LIVE SATELLITE MAP
+let map;
+function initMap(){
+  if(map) return;
+  map=L.map('map').setView([20,78],2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  fetch('https://api.wheretheiss.at/v1/satellites/25544').then(res=>res.json()).then(data=>{
+    L.marker([data.latitude,data.longitude]).addTo(map).bindPopup("🛰️ ISS yaha hai abhi");
+    document.getElementById('satInfo').innerText=`ISS Speed: ${data.velocity.toFixed(2)} km/h | Height: ${data.altitude.toFixed(2)} km`;
+  });
+}
+
+// 3. AR CAMERA
+function startAR(){
+  navigator.mediaDevices.getUserMedia({video:true}).then(stream=>{
+    document.getElementById('arVideo').srcObject=stream;
+    alert("AR On! Ab table pe ungli se planet banao");
+  });
+}
+
+// ROCKET + QUIZ + MISSIONS - PEHLE WALE HI
+function launchRocket(){document.getElementById('rocket').style.bottom='250px';document.getElementById('flame').style.display='block';setTimeout(()=>{document.getElementById('rocket').style.bottom='10px';document.getElementById('flame').style.display='none';},4000);}
+const missions=["2023 - Chandrayaan 3 - ISRO - Moon South Pole","2025 - Gaganyaan - ISRO - Human Spaceflight","2026 - Artemis II - NASA - Moon Orbit"];
 function loadMissions(){document.getElementById('missionList').innerHTML=missions.map(m=>`<li class="card" style="width:90%;text-align:left;">${m}</li>`).join('');}
-function loadScientists(){document.getElementById('scientistList').innerHTML=scientists.map(s=>`<div class="card"><h3>${s.name}</h3><p>${s.work}</p></div>`).join('');}
-function launchRocket(){document.getElementById('rocket').style.bottom='250px';document.getElementById('flame').style.display='block';document.getElementById('launchStatus').innerText='Status: Launched! T+10s to ISS';setTimeout(()=>{document.getElementById('launchStatus').innerText='Status: Docked at ISS Successfully! Mission Complete';},3000);setTimeout(()=>{document.getElementById('rocket').style.bottom='10px';document.getElementById('flame').style.display='none';},4000);}
-function crashSatellite(){document.getElementById('satellite').style.top='250px';document.getElementById('crashInfo').innerText='Burning! Atmospheric Friction. Temp > 1600°C';setTimeout(()=>{document.getElementById('satellite').style.top='10px';document.getElementById('crashInfo').innerText='Click to see Science Again';},3000);}
-let score=0;let total=0;const quizData=[{q:"ISRO ka full form kya hai?",a:["Indian Space Research Organization","International Space Org","Indian Science Org"],ans:0},{q:"Chandrayaan 3 kaha gira?",a:["North Pole","South Pole","Equator"],ans:1},{q:"Pehle Bhartiya Antariksh Yatri kaun?",a:["APJ Kalam","Rakesh Sharma","Vikram Sarabhai"],ans:1}];let qIndex=0;function loadQuiz(){document.getElementById('question').innerText=quizData[qIndex].q;document.getElementById('options').innerHTML=quizData[qIndex].a.map((opt,i)=>`<button onclick="checkQuiz(${i})">${opt}</button>`).join('');}function checkQuiz(i){total++;if(i===quizData[qIndex].ans){score++;alert("Sahi Jawab! 🚀");}else{alert("Galat! Sahi jawab: "+quizData[qIndex].a[quizData[qIndex].ans]);}document.getElementById('score').innerText=`Score: ${score} / ${total}`;qIndex=(qIndex+1)%quizData.length;loadQuiz();}function resetQuiz(){score=0;total=0;document.getElementById('score').innerText=`Score: 0 / 0`;loadQuiz();}
-window.onload=function(){loadPlanets();loadMissions();loadScientists();loadQuiz();}
+let score=0,total=0;const quizData=[{q:"ISRO ka full form?",a:["Indian Space Research Org","International Space Org"],ans:0}];let qIndex=0;
+function loadQuiz(){document.getElementById('question').innerText=quizData[qIndex].q;document.getElementById('options').innerHTML=quizData[qIndex].a.map((opt,i)=>`<button onclick="checkQuiz(${i})">${opt}</button>`).join('');}
+function checkQuiz(i){total++; if(i===quizData[qIndex].ans){score++;speak("Sahi jawab");} document.getElementById('score').innerText=`Score: ${score} / ${total}`; qIndex=(qIndex+1)%quizData.length; loadQuiz();}
+window.onload=function(){loadPlanets();loadMissions();loadQuiz();}
