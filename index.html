@@ -3,43 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WORLD SPACE CENTRE APP V3.0 - AI + AR + LIVE</title>
+  <title>WORLD SPACE CENTRE APP V3.2 - NASA API Powered</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
 </head>
 <body>
   <div class="stars"></div>
-
   <header>
-    <h1>🌍 WORLD SPACE CENTRE APP V3.0 🚀</h1>
-    <p>AI Voice • AR • Live Satellite | Made in India 🇮🇳</p>
+    <h1>🌍 WORLD SPACE CENTRE APP V3.2 🚀</h1>
+    <p>NASA Open Data • Live ISS • Hindi AI Voice | Made in India 🇮🇳</p>
   </header>
 
   <nav>
     <button onclick="showTab('solar')">🪐 Solar System</button>
-    <button onclick="showTab('launch')">🚀 Launch</button>
-    <button onclick="showTab('live')">🛰️ Live Map</button>
-    <button onclick="showTab('ar')">📱 AR Mode</button>
+    <button onclick="showTab('nasa')">🌌 NASA Photo of Day</button>
+    <button onclick="showTab('mars')">🔴 Mars Rover Photos</button>
+    <button onclick="showTab('asteroid')">☄️ Asteroid Alert</button>
+    <button onclick="showTab('live')">🛰️ Live ISS</button>
     <button onclick="showTab('missions')">📡 Missions</button>
     <button onclick="showTab('quiz')">📝 Quiz</button>
   </nav>
 
   <main>
-    <section id="solar" class="tab"><h2>Click Planet - Hindi Voice Suno</h2><div id="planets" class="grid"></div></section>
-    
-    <section id="launch" class="tab" style="display:none;"><h2>Rocket Launch Simulator</h2><div class="rocket-scene"><div id="rocket">🚀</div><div id="flame">🔥</div></div><button onclick="launchRocket()">Launch to ISS</button><p id="launchStatus">Status: Ready</p></section>
+    <section id="solar" class="tab"><h2>Planet pe Click Karo - Hindi Voice Suno</h2><div id="planets" class="grid"></div></section>
 
-    <section id="live" class="tab" style="display:none;"><h2>Live Satellite Tracking</h2><div id="map"></div><p id="satInfo">Loading ISS Location...</p></section>
+    <section id="nasa" class="tab" style="display:none;"><h2>NASA Astronomy Picture of the Day</h2><img id="nasaImg" alt="NASA APOD"><h3 id="nasaTitle">Loading...</h3><p id="nasaDesc"></p><small>Credit: NASA</small></section>
 
-    <section id="ar" class="tab" style="display:none;"><h2>AR Space - Camera On Karo</h2><button onclick="startAR()">Start AR Camera</button><video id="arVideo" autoplay></video><p>Table pe ungli rakho, Planet aa jayega</p></section>
+    <section id="mars" class="tab" style="display:none;"><h2>Mars Rover - Aaj ki Asli Photo</h2><div id="marsPhotos" class="grid"></div><small>Data: NASA Curiosity Rover</small></section>
+
+    <section id="asteroid" class="tab" style="display:none;"><h2>Aaj Dharti ke Paas Asteroid</h2><ul id="asteroidList"></ul><small>Data: NASA NeoWs API</small></section>
+
+    <section id="live" class="tab" style="display:none;"><h2>Live ISS Location</h2><div id="map"></div><p id="satInfo">Loading...</p></section>
 
     <section id="missions" class="tab" style="display:none;"><h2>ISRO & NASA Mission Timeline</h2><ul id="missionList"></ul></section>
 
     <section id="quiz" class="tab" style="display:none;"><h2>ISRO Scientist Quiz</h2><p id="question"></p><div id="options"></div><p id="score">Score: 0 / 0</p></section>
   </main>
 
-  <footer><p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p></footer>
+  <footer>
+    <p><b>Disclaimer:</b> This app uses public data from NASA Open APIs. Not affiliated with NASA or ISRO.</p>
+    <p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
