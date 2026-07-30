@@ -3,29 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WORLD SPACE CENTRE APP - ISRO NASA EDUCATION</title>
+  <title>WORLD SPACE CENTRE APP V3.0 - AI + AR + LIVE</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
 </head>
 <body>
   <div class="stars"></div>
-  <header><h1>🌍 WORLD SPACE CENTRE APP 🚀</h1><p>ISRO • NASA • ESA • SpaceX | Learn. Explore. Innovate. | Made in India 🇮🇳</p></header>
+
+  <header>
+    <h1>🌍 WORLD SPACE CENTRE APP V3.0 🚀</h1>
+    <p>AI Voice • AR • Live Satellite | Made in India 🇮🇳</p>
+  </header>
+
   <nav>
-    <button onclick="showTab('solar')">🪐 3D Solar System</button>
-    <button onclick="showTab('launch')">🚀 Rocket Launch</button>
-    <button onclick="showTab('missions')">📡 Mission Timeline</button>
-    <button onclick="showTab('scientist')">👨‍🚀 Scientists</button>
-    <button onclick="showTab('crash')">💥 Satellite Re-entry</button>
-    <button onclick="showTab('quiz')">📝 Pro Quiz</button>
+    <button onclick="showTab('solar')">🪐 Solar System</button>
+    <button onclick="showTab('launch')">🚀 Launch</button>
+    <button onclick="showTab('live')">🛰️ Live Map</button>
+    <button onclick="showTab('ar')">📱 AR Mode</button>
+    <button onclick="showTab('missions')">📡 Missions</button>
+    <button onclick="showTab('quiz')">📝 Quiz</button>
   </nav>
+
   <main>
-    <section id="solar" class="tab"><h2>Interactive Solar System</h2><div id="planets" class="grid"></div></section>
-    <section id="launch" class="tab" style="display:none;"><h2>Rocket Launch Simulator</h2><div class="rocket-scene"><div id="rocket">🚀</div><div id="flame">🔥</div></div><button onclick="launchRocket()">Launch to ISS</button><p id="launchStatus">Status: Ready for Launch</p></section>
-    <section id="missions" class="tab" style="display:none;"><h2>ISRO & NASA Mission Timeline 1957-2026</h2><ul id="missionList"></ul></section>
-    <section id="scientist" class="tab" style="display:none;"><h2>Legendary Scientists of Space</h2><div id="scientistList" class="grid"></div></section>
-    <section id="crash" class="tab" style="display:none;"><h2>Why Satellites Burn in Atmosphere?</h2><div class="crash-scene"><div id="satellite">🛰️</div></div><button onclick="crashSatellite()">Re-enter Atmosphere</button><p id="crashInfo">Click to see Science</p></section>
-    <section id="quiz" class="tab" style="display:none;"><h2>ISRO Scientist Exam Level Quiz</h2><p id="question"></p><div id="options"></div><p id="score">Score: 0 / 0</p><button onclick="resetQuiz()">Reset Quiz</button></section>
+    <section id="solar" class="tab"><h2>Click Planet - Hindi Voice Suno</h2><div id="planets" class="grid"></div></section>
+    
+    <section id="launch" class="tab" style="display:none;"><h2>Rocket Launch Simulator</h2><div class="rocket-scene"><div id="rocket">🚀</div><div id="flame">🔥</div></div><button onclick="launchRocket()">Launch to ISS</button><p id="launchStatus">Status: Ready</p></section>
+
+    <section id="live" class="tab" style="display:none;"><h2>Live Satellite Tracking</h2><div id="map"></div><p id="satInfo">Loading ISS Location...</p></section>
+
+    <section id="ar" class="tab" style="display:none;"><h2>AR Space - Camera On Karo</h2><button onclick="startAR()">Start AR Camera</button><video id="arVideo" autoplay></video><p>Table pe ungli rakho, Planet aa jayega</p></section>
+
+    <section id="missions" class="tab" style="display:none;"><h2>ISRO & NASA Mission Timeline</h2><ul id="missionList"></ul></section>
+
+    <section id="quiz" class="tab" style="display:none;"><h2>ISRO Scientist Quiz</h2><p id="question"></p><div id="options"></div><p id="score">Score: 0 / 0</p></section>
   </main>
-  <footer><p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar, India | MIT License 2026</p><p>For EDUCATIONAL Purpose Only. Not affiliated with ISRO/NASA</p></footer>
+
+  <footer><p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p></footer>
   <script src="script.js"></script>
 </body>
 </html>
