@@ -1,19 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <title>WORLD SPACE CENTRE APP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORLD SPACE CENTRE APP 🚀</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <center>
+  <header>
     <h1>🌍 WORLD SPACE CENTRE APP 🚀</h1>
-    <h3>Chalo Brahmand ki Sair Karein!</h3>
-    <button onclick="openSolar()">Solar System</button>
-    <button onclick="openScientist()">Scientist Story</button>
-    <button onclick="openQuiz()">Space Quiz</button>
-  </center>
+    <p>"Har Bachhe se Scientist tak - Space ka Gyaan Sabke Liye"</p>
+  </header>
+
+  <nav>
+    <button onclick="showTab('solar')">🪐 Solar System</button>
+    <button onclick="showTab('missions')">🚀 Missions</button>
+    <button onclick="showTab('scientist')">👨‍🚀 Scientists</button>
+    <button onclick="showTab('quiz')">📝 Space Quiz</button>
+  </nav>
+
+  <main>
+    <section id="solar" class="tab">
+      <h2>Solar System</h2>
+      <div id="planets"></div>
+    </section>
+
+    <section id="missions" class="tab" style="display:none;">
+      <h2>ISRO & NASA Missions</h2>
+      <ul id="missionList"></ul>
+    </section>
+
+    <section id="scientist" class="tab" style="display:none;">
+      <h2>Famous Scientists</h2>
+      <div id="scientistList"></div>
+    </section>
+
+    <section id="quiz" class="tab" style="display:none;">
+      <h2>Space Quiz</h2>
+      <p id="question"></p>
+      <button onclick="checkAns('Mars')">Mars</button>
+      <button onclick="checkAns('Jupiter')">Jupiter</button>
+      <p id="result"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by Chandan Jha | Jamalpur, Bihar | MIT License 2026</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
